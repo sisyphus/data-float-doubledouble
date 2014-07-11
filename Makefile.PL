@@ -19,10 +19,21 @@ if($nv1 == $nv2) {
   exit 0;
 }
 
-my %h = (NAME => 'Data::Float::DoubleDouble',
-         VERSION_FROM => 'DoubleDouble.pm',
-         PREREQ_PM => {'Math::NV' => '0.02'},
-         LICENSE  => 'perl',
+my %h = (
+  NAME => 'Data::Float::DoubleDouble',
+  VERSION_FROM => 'DoubleDouble.pm',
+  PREREQ_PM => {'Math::NV' => '0.02'},
+  LICENSE  => 'perl',
+  META_MERGE => {
+   'meta-spec' => { version => 2 },
+    resources => {
+      repository => {
+        type => 'git',
+        url => 'https://github.com/sisyphus/data-float-doubledouble.git',
+        web => 'https://github.com/sisyphus/data-float-doubledouble',
+      },
+    },
+  },
         );
 
 WriteMakefile(%h);
