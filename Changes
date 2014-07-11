@@ -1,5 +1,8 @@
 Revision history for Perl module Data::Float::DoubleDouble
 
+1.04
+    - Add some metadata to Makefile.PL.
+
 1.03
     - Add some more tests.
     - Add validate_hex, validate_unpack, validate_bin
