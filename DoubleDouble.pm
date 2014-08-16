@@ -226,7 +226,9 @@ sub float_B {
 
   my($exp1, $exp2) = ($pre1 - 1023, $pre2 - 1023);
   my $inter_zero = inter_zero($exp1, $exp2);
-  my $zeroes = '0' x $inter_zero;
+  # Need to avoid warning here with 5.22 if $inter_zero < 0.
+  my $zeroes = $inter_zero > 0 ? '0' x $inter_zero
+                               : '';
 
   if($inter_zero < 0) {
     $bin_pre2 = '';
