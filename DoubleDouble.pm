@@ -184,8 +184,7 @@ sub float_B {
   my $pre2 = hex(substr($hex, 16, 3));
   my $discard = 0;
 
-  my $sign1 = '+';
-  my $sign2 = '+';
+  my ($sign1, $sign2) = ('+', '+');
 
   if($pre1 > 2047) {
     $pre1 -= 2048;
