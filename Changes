@@ -2,6 +2,7 @@ Revision history for Perl module Data::Float::DoubleDouble
 
 1.04
     - Add some metadata to Makefile.PL.
+    - Small rewrite of float_B to avoid new warning scheduled for 5.22
 
 1.03
     - Add some more tests.
