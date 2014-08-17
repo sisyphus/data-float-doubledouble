@@ -50,7 +50,7 @@ $Data::Float::DoubleDouble::neg_eps = -(2 ** -1074);
 $Data::Float::DoubleDouble::max_fin =  H2NV('7fefffffffffffff7c8fffffffffffff');
 $Data::Float::DoubleDouble::min_fin = $Data::Float::DoubleDouble::max_fin * -1;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 #$VERSION = eval $VERSION;
 DynaLoader::bootstrap Data::Float::DoubleDouble $VERSION;
 
