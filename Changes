@@ -1,5 +1,7 @@
 Revision history for Perl module Data::Float::DoubleDouble
 
+1.08
+
 1.07
    - Change template for NV2H() and H2NV() from "D<" to "F<", and provide LD2H() and
      H2LD() - which use the "D<" template.
