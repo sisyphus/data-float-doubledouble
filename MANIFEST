@@ -18,4 +18,5 @@ t/16_inf_nan_zero.t
 t/17_float_class.t
 t/20_H_float.t
 t/21_H_float_roundup.t
+t/22_dd_bytes.t
 README
