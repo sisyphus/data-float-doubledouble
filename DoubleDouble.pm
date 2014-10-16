@@ -22,7 +22,7 @@ use subs qw(DD_FLT_RADIX DD_LDBL_MAX DD_LDBL_MIN DD_LDBL_DIG DD_LDBL_MANT_DIG
  float_H2B B2float_H standardise_bin_mant hex_float float_hex float_B B_float
  valid_hex valid_bin valid_unpack express NV2binary
  float_is_infinite float_is_nan float_is_finite float_is_zero float_is_nzfinite
- float_is_normal float_is_subnormal float_class
+ float_is_normal float_is_subnormal float_class dd_bytes
  nextafter nextup nextdown);
 
 %Data::Float::DoubleDouble::EXPORT_TAGS = (all =>[qw(
@@ -34,7 +34,7 @@ use subs qw(DD_FLT_RADIX DD_LDBL_MAX DD_LDBL_MIN DD_LDBL_DIG DD_LDBL_MANT_DIG
  float_H2B B2float_H standardise_bin_mant float_hex hex_float float_B B_float
  valid_hex valid_bin valid_unpack express NV2binary
  float_is_infinite float_is_nan float_is_finite float_is_zero float_is_nzfinite
- float_is_normal float_is_subnormal float_class
+ float_is_normal float_is_subnormal float_class dd_bytes
  nextafter nextup nextdown)]);
 
 # Maximum finite ($max_fin) is actually:
@@ -301,8 +301,7 @@ sub NV2binary {
 
 ##############################
 ##############################
-# Return the NV from the binary pepresentation (sign, mantissa, exponent).
-# Optionally takes a 4th arg of 'raw'.
+# Return the NV from the binary representation (sign, mantissa, exponent).
 
 sub B_float {
   die "Wrong number of args to B_float (", scalar @_, ")"
@@ -580,7 +579,7 @@ sub inter_zero {
 
 ##############################
 ##############################
-# Return true iff the argument is infinite.
+# Return true iff at least one argument is infinite.
 
 sub are_inf {
 
@@ -596,7 +595,7 @@ sub are_inf {
 
 ##############################
 ##############################
-# Return true iff the argument is a NaN.
+# Return true iff at least one argument is a NaN.
 
 sub are_nan {
 
@@ -1012,7 +1011,7 @@ sub express {
                        : @_ == 1 ? 0
                                  : undef;
 
-  die "Bad arg(s) supplied to express()" unless defined $do_hex;
+  die "Bad arg(s) supplied to express(): @_" unless defined $do_hex;
 
   my($ret1, $ret2);
   my($m1, $m2, $m3) = ('0+e', '\.e', 'e');
@@ -1047,6 +1046,14 @@ sub express {
   return $ret;
 }
 
+##############################
+##############################
+# Returns same as NV2H()
+
+sub dd_bytes {
+  my @ret = _dd_bytes($_[0]);
+  return join '', @ret;
+}
 
 ##############################
 ##############################
@@ -1195,8 +1202,8 @@ Data::Float::DoubleDouble -  human-readable representation of the "double-double
 =head1 AIM
 
   Mostly, one would use Data::Float to do what this module does.
-  But that module doesn't work with the powerpc long double,
-  which uses a 'double-double' arrangement ... hence, this module.
+  But that module doesn't work with the 'double-double' type of
+  long double ... hence, this module.
 
   Given a double-double value, we aim to be able to:
    1) Convert that NV to its internal packed hex form;
@@ -1350,7 +1357,9 @@ Data::Float::DoubleDouble -  human-readable representation of the "double-double
 
    For $hex written in the format returned by float_H(), returns
    the NV that corresponds to $hex.
+
   #############################################
+
   @bin = float_B($nv, $opt); # Second arg isoptional
 
    Returns the sign, the mantissa (as a base 2 string), and the
@@ -1491,6 +1500,12 @@ Data::Float::DoubleDouble -  human-readable representation of the "double-double
     2) Append zeroes if there are too few characters.
    If the string was modified, return that modified string - else
    return the 1st arg.
+
+  #############################################
+
+  $hex = dd_bytes($nv);
+
+   Returns same as NV2H($nv).
 
   #############################################
 
