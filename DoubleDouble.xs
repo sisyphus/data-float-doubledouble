@@ -277,6 +277,32 @@ void _calculate (pTHX_ SV * bin, SV * exponent) {
   XSRETURN(2);
 }
 
+void _dd_bytes(SV * sv) {
+  dXSARGS;
+  long double dd = SvNV(sv);
+  int i, n = sizeof(long double);
+  char * buff;
+  void * p = &dd;
+
+  Newx(buff, 4, char);
+  if(buff == NULL) croak("Failed to allocate memory in _dd_bytes function");
+
+  sp = mark;
+
+#ifdef WE_HAVE_BENDIAN /* Big Endian architecture */
+  for (i = 0; i < n; i++) {
+#else
+  for (i = n - 1; i >= 0; i--) {
+#endif
+
+    sprintf(buff, "%02X", ((unsigned char*)p)[i]);
+    XPUSHs(sv_2mortal(newSVpv(buff, 0)));
+  }
+  PUTBACK;
+  Safefree(buff);
+  XSRETURN(n);
+}
+
 
 MODULE = Data::Float::DoubleDouble  PACKAGE = Data::Float::DoubleDouble
 
@@ -416,6 +442,22 @@ _calculate (bin, exponent)
         PPCODE:
         temp = PL_markstack_ptr++;
         _calculate(aTHX_ bin, exponent);
+        if (PL_markstack_ptr != temp) {
+          /* truly void, because dXSARGS not invoked */
+          PL_markstack_ptr = temp;
+          XSRETURN_EMPTY; /* return empty stack */
+        }
+        /* must have used dXSARGS; list context implied */
+        return; /* assume stack size is correct */
+
+void
+_dd_bytes (sv)
+	SV *	sv
+        PREINIT:
+        I32* temp;
+        PPCODE:
+        temp = PL_markstack_ptr++;
+        _dd_bytes(sv);
         if (PL_markstack_ptr != temp) {
           /* truly void, because dXSARGS not invoked */
           PL_markstack_ptr = temp;
