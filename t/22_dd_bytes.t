@@ -12,7 +12,7 @@ for my $exp(0..10, 20, 30, 280 .. 300) {
     my $nv = $str * 1.0;
     my $bytes = dd_bytes($nv);
     my $hex = NV2H($nv);
-    if($hex ne $bytes) {
+    if(lc($hex) ne lc($bytes)) {
       $ok = 0;
       warn "\n\$bytes: $bytes\n\$hex: $hex\n\n";
     }
@@ -30,7 +30,7 @@ for my $exp(0..10, 20, 30, 280 .. 300) {
     my $nv = $str * 1.0;
     my $bytes = dd_bytes($nv);
     my $hex = NV2H($nv);
-    if($hex ne $bytes) {
+    if(lc($hex) ne lc($bytes)) {
       $ok = 0;
       warn "\n\$bytes: $bytes\n\$hex: $hex\n\n";
     }
@@ -47,3 +47,5 @@ sub random_select {
   }
   return $ret;
 }
+
+
