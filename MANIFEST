@@ -6,7 +6,6 @@ DoubleDouble.xs
 t/01_load.t
 t/02_str2mpfr_cross_checks.t
 t/03_next.t
-t/04_validate.t
 t/05_DD.t
 t/06_DD2HEX.t
 t/07_nv2mpfr_cross_checks.t
