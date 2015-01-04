@@ -1182,7 +1182,8 @@ Data::Float::DoubleDouble -  human-readable representation of the "double-double
    Express the double as msd + lsd, where the 2 doubles (msd and lsd)
    are written in scientic notation. The doubles will be written in
    decimal format unless a second arg of 'h' or 'H' is provided - in
-   which case they will be written in hex format.
+   which case they will be written in hex (respectively capitalised
+   hex) format.
    The second arg ($opt), if provided, must be either 'h' or 'H'.
 
   #############################################
