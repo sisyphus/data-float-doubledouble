@@ -1,6 +1,7 @@
 Revision history for Perl module Data::Float::DoubleDouble
 
 1.09
+   - Add get_doubles function.
 
 1.08
    - Add dd_bytes function.
