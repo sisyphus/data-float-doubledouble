@@ -18,7 +18,7 @@ use subs qw(DD_FLT_RADIX DD_LDBL_MAX DD_LDBL_MIN DD_LDBL_DIG DD_LDBL_MANT_DIG
  DD_LDBL_MIN_EXP DD_LDBL_MAX_EXP DD_LDBL_MIN_10_EXP DD_LDBL_MAX_10_EXP
  DD_LDBL_EPSILON DD_LDBL_DECIMAL_DIG DD_LDBL_HAS_SUBNORM DD_LDBL_TRUE_MIN
  NV2H H2NV D2H H2D DD2HEX std_float_H LD2H H2LD
- get_sign get_exp get_mant_H float_H H_float inter_zero are_inf are_nan
+ get_sign get_exp get_doubles get_mant_H float_H H_float inter_zero are_inf are_nan
  float_H2B B2float_H standardise_bin_mant hex_float float_hex float_B B_float
  valid_hex valid_bin valid_unpack express NV2binary
  float_is_infinite float_is_nan float_is_finite float_is_zero float_is_nzfinite
@@ -30,7 +30,7 @@ use subs qw(DD_FLT_RADIX DD_LDBL_MAX DD_LDBL_MIN DD_LDBL_DIG DD_LDBL_MANT_DIG
  DD_LDBL_MIN_EXP DD_LDBL_MAX_EXP DD_LDBL_MIN_10_EXP DD_LDBL_MAX_10_EXP
  DD_LDBL_EPSILON DD_LDBL_DECIMAL_DIG DD_LDBL_HAS_SUBNORM DD_LDBL_TRUE_MIN
  NV2H H2NV D2H H2D DD2HEX std_float_H LD2H H2LD
- get_sign get_exp get_mant_H float_H H_float inter_zero are_inf are_nan
+ get_sign get_exp get_doubles get_mant_H float_H H_float inter_zero are_inf are_nan
  float_H2B B2float_H standardise_bin_mant float_hex hex_float float_B B_float
  valid_hex valid_bin valid_unpack express NV2binary
  float_is_infinite float_is_nan float_is_finite float_is_zero float_is_nzfinite
@@ -159,6 +159,15 @@ sub get_exp {
 
   return ($exp1 - 1023, $exp2 - 1023);
 
+}
+
+##############################
+##############################
+# Return the 2 doubles encapsulated in the given doubledouble.
+
+sub get_doubles {
+  my $ld_hex = NV2H($_[0]);
+  return (H2D(substr($ld_hex, 0, 16)), H2D(substr($ld_hex, 16, 16)));
 }
 
 ##############################
@@ -1254,6 +1263,12 @@ Data::Float::DoubleDouble -  human-readable representation of the "double-double
   ($exp1, $exp2) = get_exp($nv);
 
    Returns the exponents of the two doubles contained in $nv.
+
+  #############################################
+
+  ($double1, $double2) = get_doubles($nv);
+
+   Returns the two doubles contained in $nv.
 
   #############################################
 
