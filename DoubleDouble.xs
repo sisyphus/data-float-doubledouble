@@ -163,7 +163,7 @@ void DD2HEX(pTHX_ SV * nv, char * fmt) {
  char * buffer;
 
  if(!strEQ(fmt, "%La") && !strEQ(fmt, "%LA"))
-   croak("Second arg to DD2HEX is %s - but needs to be either \"%La\" or \"%LA\"", fmt);
+   croak("Second arg to DD2HEX is %s - but needs to be either \"%%La\" or \"%%LA\"", fmt);
 
  Newx(buffer, 40, char);
  if(buffer == NULL) croak("Failed to allocate memory in DD2HEX");
