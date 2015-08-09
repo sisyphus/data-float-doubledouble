@@ -2,6 +2,7 @@ Revision history for Perl module Data::Float::DoubleDouble
 
 1.09
    - Add get_doubles function.
+   - Fix croak() message in DD2HEX XSub. (Replace '%' with '%%' where required.)
 
 1.08
    - Add dd_bytes function.
