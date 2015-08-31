@@ -3,6 +3,7 @@ Changes
 Makefile.PL
 DoubleDouble.pm
 DoubleDouble.xs
+demos/overflow.p
 t/01_load.t
 t/02_str2mpfr_cross_checks.t
 t/03_next.t
