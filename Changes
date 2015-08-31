@@ -1,6 +1,7 @@
 Revision history for Perl module Data::Float::DoubleDouble
 
 1.10
+   - Add demos/overflow.p
 
 1.09
    - Add get_doubles function.
