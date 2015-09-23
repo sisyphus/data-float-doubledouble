@@ -128,7 +128,7 @@ sub H2LD {
 
 ##############################
 ##############################
-# A function to return the signs of the NV
+# A function to return the signs of the doubles that make up the doubledouble.
 
 sub get_sign {
 
@@ -142,7 +142,7 @@ sub get_sign {
 
 ##############################
 ##############################
-# A function to return the exponents of the NV
+# A function to return the exponents of the doubles that make up the doubledouble.
 
 sub get_exp {
 
