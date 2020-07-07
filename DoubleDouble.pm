@@ -52,7 +52,7 @@ $Data::Float::DoubleDouble::min_fin = $Data::Float::DoubleDouble::max_fin * -1;
 
 our $VERSION = '1.10';
 #$VERSION = eval $VERSION;
-DynaLoader::bootstrap Data::Float::DoubleDouble $VERSION;
+Data::Float::DoubleDouble->DynaLoader::bootstrap($VERSION);
 
 #$Data::Float::DoubleDouble::debug = 0;
 #$Data::Float::DoubleDouble::pack = $Config{nvtype} eq 'double' ? "F<" : "D<";
